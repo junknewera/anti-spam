@@ -5,6 +5,8 @@ import os
 from pydantic import BaseModel
 from fastapi.responses import JSONResponse
 import logging
+from prometheus_fastapi_instrumentator import Instrumentator
+
 
 # Настройка логирования
 logging.basicConfig(
@@ -17,6 +19,7 @@ logging.basicConfig(
 from preprocessing import preprocess
 
 app = FastAPI()
+Instrumentator().instrument(app).expose(app)
 
 # Путь к модели и данным
 model_path = "spam_model.pkl"
