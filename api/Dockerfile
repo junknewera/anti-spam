@@ -3,7 +3,8 @@ FROM python:3.9-slim
 WORKDIR /app
 
 COPY requirements.txt .
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir fastapi uvicorn pandas requests lightautoml
+RUN pip install --no-cache-dir torch==2.7.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
 
 COPY main.py .
 COPY preprocessing.py .
