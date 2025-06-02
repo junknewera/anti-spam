@@ -3,4 +3,3 @@ uvicorn
 pandas
 lightautoml
 pydantic
-prometheus-fastapi-instrumentator
