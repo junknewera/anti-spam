@@ -1,4 +1,4 @@
-#!/home/junknewera/workspace/machine-learning/projects/digital-economics-league/anti-spam/env/bin/python3.12
+#!/home/junknewera/workspace/machine-learning/projects/digital-economics-league/anti-spam/env/bin/python3.9
 # -*- coding: utf-8 -*-
 import re
 import sys
