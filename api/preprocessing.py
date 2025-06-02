@@ -1,8 +1,6 @@
 import pandas as pd
 import re
-import os
 
-# Функции предобработки из preprocessing.py
 SPAM_WORDS = ['тест', 'asdf', 'бесплатно', 'идиот', 'не звоните', 'проверка']
 
 def contains_spam_words(text):
@@ -17,13 +15,15 @@ def is_valid_phone(phone):
     phone = str(phone)
     return len(phone) == 11 and phone.isdigit()
 
-def preprocess(df: pd.DataFrame) -> pd.DataFrame:
+def preprocess(raw_data: dict) -> pd.DataFrame:
+    df = pd.DataFrame([raw_data])  # оборачиваем одну заявку в DataFrame
+
     # Базовая очистка
     df["name"] = df["name"].fillna("")
     df["phone"] = df["phone"].fillna("")
     df["email"] = df["email"].fillna("")
     df["comment"] = df["comment"].fillna("")
-    df["time_on_page"] = df["time_on_page"].fillna(df["time_on_page"].median())  # Заполняем медианой
+    df["time_on_page"] = df["time_on_page"].fillna(0)  # Для одной заявки медиана не работает, используем 0
     df["actions"] = df["actions"].fillna(0)
 
     # Признаки
@@ -51,21 +51,3 @@ def preprocess(df: pd.DataFrame) -> pd.DataFrame:
     df.drop(columns=["name", "phone", "email", "comment"], inplace=True)
 
     return df
-
-# Путь к данным
-data_dir = "../data"
-input_path = os.path.join(data_dir, "synthetic_lead_data.csv")
-output_path = os.path.join(data_dir, "processed_lead_data.csv")
-
-# Загрузка данных
-df = pd.read_csv(input_path)
-
-# Предобработка
-processed_df = preprocess(df)
-
-# Переименование spam_flag в is_spam для совместимости с последующим кодом
-processed_df = processed_df.rename(columns={"spam_flag": "is_spam"})
-
-# Сохранение обработанных данных
-processed_df.to_csv(output_path, index=False)
-print(f"Обработанные данные сохранены в {output_path}")
