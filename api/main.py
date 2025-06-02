@@ -5,12 +5,12 @@ import os
 from pydantic import BaseModel
 
 # Импорт функций предобработки из preprocessing.py
-from ..scripts.preprocessing import preprocess
+from preprocessing import preprocess
 
 app = FastAPI()
 
 # Путь к модели
-model_path = "../data/spam_model.pkl"
+model_path = "spam_model.pkl"
 
 # Загрузка модели
 with open(model_path, "rb") as f:
