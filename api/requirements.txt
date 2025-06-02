@@ -3,4 +3,3 @@ uvicorn
 pandas
 lightautoml
 pydantic
-torch==2.7.0+cpu -f https://download.pytorch.org/whl/torch_stable.html

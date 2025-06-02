@@ -14,6 +14,7 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 
+app = FastAPI()
 # Импорт функций предобработки из preprocessing.py
 from preprocessing import preprocess
 
